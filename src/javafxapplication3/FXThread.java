@@ -13,7 +13,7 @@ public class FXThread implements Runnable {
     @Override
     public void run() {
         Data.money+=Data.autoclick;
-        Data.licznik.setText(String.valueOf(Data.money));
+        Data.licznik.setText(String.valueOf((int)Data.money));
     
     }
     

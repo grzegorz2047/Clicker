@@ -12,7 +12,7 @@ public class Buying {
     
     public static void buySomething(){
         if(Data.money>=30){
-            Data.autoclick+=1;
+            Data.autoclick+=0.1;
             Data.money-=30;
             Data.licznik.setText(String.valueOf((int)Data.money));
         }
