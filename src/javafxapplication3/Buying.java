@@ -16,6 +16,7 @@ public class Buying {
             Data.money-=Data.bezdomnyprice;
             Data.licznik.setText(String.valueOf((int)Data.money));
             Data.bezdomnyprice=(Data.bezdomnyprice*Data.multiplierprice)+Data.bezdomnyprice;
+            Data.bezdomnybutton.setText("Bezdomny, koszt: "+(int)Data.bezdomnyprice);
         }
     }
     public static void buyMieszczanin(){
@@ -74,5 +75,7 @@ public class Buying {
             Data.tuskprice=(Data.tuskprice*Data.multiplierprice)+Data.tuskprice;
         }
     }
-    
+    public static void loadButtonPrices(){
+        Data.bezdomnybutton.setText("Bezdomny, koszt: "+(int)Data.bezdomnyprice);
+    }
 }
