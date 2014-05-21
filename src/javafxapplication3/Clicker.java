@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -27,26 +28,26 @@ public class Clicker extends Application {
     public void start(Stage primaryStage) {
         
         Data.buttonforclick= new Button("kliknij");
+        Data.buttonforclick.setId("klik");
         Data.licznik= new Label("0");
-        Data.licznik.setScaleX(4);
-        Data.licznik.setScaleY(4);
-                
+        Data.licznik.setScaleX(8);
+        Data.licznik.setScaleY(8);
 
         
         GridPane template = new GridPane();
         template.setHgap(30);
         template.setVgap(32);
-
+        template.setId("pane");
         HBox hbButtons = new HBox();
         hbButtons.setSpacing(30.0);
         hbButtons.getChildren().addAll(Data.buttonforclick);
-        template.add(hbButtons,5,3,2,1);
+        template.add(hbButtons,5,7,2,1);
         
         
         
         HBox hblicznik = new HBox();
         hblicznik.getChildren().addAll(Data.licznik);
-        template.add(hblicznik, 6, 1,2,1);
+        template.add(hblicznik, 6, 2,2,1);
 
         final Timer timer = new Timer() ;
         timer.schedule(new ClassForThread(), 0, 1000);
@@ -68,7 +69,8 @@ public class Clicker extends Application {
                 Data.domekbutton, Data.monopolowybutton, Data.blokbutton,
                 Data.biedronkabutton, Data.wiezowiecbutton, Data.Tuskbutton);
         template.add(vb, 1,1,3,7);
-        Scene scene = new Scene(template, 500, 400);
+        Scene scene = new Scene(template, 400, 400);
+        scene.getStylesheets().add("/resources/style.css".toString());
         primaryStage.setTitle("VATClicker");
         primaryStage.setScene(scene);
         primaryStage.show();
