@@ -7,15 +7,12 @@ package javafxapplication3;
 import java.util.Timer;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -65,7 +62,7 @@ public class Clicker extends Application {
         
         ButtonEvents be = new ButtonEvents();
         be.registerEvents();
-        
+        Buying.loadButtonPrices();
         VBox vb = new VBox();
         vb.getChildren().addAll(Data.bezdomnybutton, Data.mieszczaninbutton, 
                 Data.domekbutton, Data.monopolowybutton, Data.blokbutton,
@@ -86,10 +83,6 @@ public class Clicker extends Application {
     }
 
     /**
-     * The main() method is ignored in correctly deployed JavaFX application.
-     * main() serves only as fallback in case the application can not be
-     * launched through deployment artifacts, e.g., in IDEs with limited FX
-     * support. NetBeans ignores main().
      *
      * @param args the command line arguments
      */
