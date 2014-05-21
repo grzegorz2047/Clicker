@@ -6,6 +6,7 @@ package javafxapplication3;
 
 import java.util.Timer;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -17,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  *
@@ -28,7 +30,6 @@ public class Clicker extends Application {
     public void start(Stage primaryStage) {
         
         Data.buttonforclick= new Button("kliknij");
-        Data.buybutton = new Button("Kup");
         Data.licznik= new Label("0");
         Data.licznik.setScaleX(4);
         Data.licznik.setScaleY(4);
@@ -41,7 +42,7 @@ public class Clicker extends Application {
 
         HBox hbButtons = new HBox();
         hbButtons.setSpacing(30.0);
-        hbButtons.getChildren().addAll(Data.buybutton, Data.buttonforclick);
+        hbButtons.getChildren().addAll(Data.buttonforclick);
         template.add(hbButtons,5,3,2,1);
         
         
@@ -50,22 +51,8 @@ public class Clicker extends Application {
         hblicznik.getChildren().addAll(Data.licznik);
         template.add(hblicznik, 6, 1,2,1);
 
-        Timer timer = new Timer() ;
+        final Timer timer = new Timer() ;
         timer.schedule(new ClassForThread(), 0, 1000);
-    
-
-        Data.buttonforclick.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                Data.licznik.setText(String.valueOf(Data.money++));
-            }
-        });
-        Data.buybutton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Buying.buySomething();
-            }
-        });
         
         Data.bezdomnybutton = new Button("Bezdomny, koszt: ");
         Data.mieszczaninbutton = new Button("Mieszczanin, koszt: ");
@@ -75,15 +62,27 @@ public class Clicker extends Application {
         Data.biedronkabutton = new Button("Biedronka, koszt: ");
         Data.wiezowiecbutton = new Button("Wiezowiec, koszt: ");
         Data.Tuskbutton= new Button("Tusk, koszt: ");
+        
+        ButtonEvents be = new ButtonEvents();
+        be.registerEvents();
+        
         VBox vb = new VBox();
         vb.getChildren().addAll(Data.bezdomnybutton, Data.mieszczaninbutton, 
                 Data.domekbutton, Data.monopolowybutton, Data.blokbutton,
                 Data.biedronkabutton, Data.wiezowiecbutton, Data.Tuskbutton);
-        template.add(vb, 4,4,1,1);
-        Scene scene = new Scene(template, 400, 300);
+        template.add(vb, 1,1,3,7);
+        Scene scene = new Scene(template, 500, 400);
         primaryStage.setTitle("VATClicker");
         primaryStage.setScene(scene);
         primaryStage.show();
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent t) {
+                timer.cancel();
+                Platform.exit();
+                System.exit(0);
+            }
+        });
     }
 
     /**
